@@ -1,0 +1,1 @@
+FROM vromero/activemq-artemis

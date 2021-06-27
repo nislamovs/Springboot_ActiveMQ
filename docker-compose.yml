@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+
+  artemismq:
+    container_name: "artemismq"
+    hostname: localhost
+    user: root
+    build:
+      context: artemismq/
+      dockerfile: Dockerfile
+    environment:
+      ENABLE_JMX_EXPORTER: "true"
+      ARTEMIS_MIN_MEMORY: "1512M"
+      ARTEMIS_MAX_MEMORY: "2000M"
+      ARTEMIS_USERNAME: "admin"
+      ARTEMIS_PASSWORD: "admin"
+#    volumes:
+#      - "./.docker/activemq/volumes/conf:/opt/activemq/conf"
+#      - "./.docker/activemq/volumes/data:/opt/activemq/data"
+    ports:
+      - "5672:5672"
+      - "61616:61616"
+      - "8161:8161"
+
+  msg_producer:
+    container_name: "msg_producer"
+    hostname: localhost
+    build:
+      context: ./msgProducer/
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    volumes:
+      - "./.docker/msgProducer/volumes/logs:/logs"
+    depends_on:
+      - artemismq
+
+  msg_consumer:
+    container_name: "msg_consumer"
+    hostname: localhost
+    build:
+      context: ./msgConsumer/
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      SLACK_URL: ${SLACK_URL}
+    volumes:
+      - "./.docker/msgConsumer/volumes/logs:/logs"
+    depends_on:
+      - artemismq

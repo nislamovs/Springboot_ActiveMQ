@@ -1,0 +1,21 @@
+server:
+  port: 8082
+
+application:
+  developer: Nizami Islamovs
+  version: v 1.0.0
+  deploymentdate: 2018-09-11 21:15:29
+  support.email: nizamiislamovs@gmail.com
+  description: Slack producer mcs
+  title: Slack producer mcs
+
+slack:
+  url: ${SLACK_URL}
+
+spring:
+  artemis:
+    mode: native
+    user: admin
+    password: admin
+    port: 61616
+    host: artemismq
