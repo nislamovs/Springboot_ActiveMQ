@@ -1,10 +1,10 @@
-# Springboot_ActiveMQ
-#### Springboot + ActiveMQ + Monorepo + Docker example
+# Springboot_ActiveMQ [Artemis]
+#### Springboot + ActiveMQ [Artemis] + Monorepo + Docker example
 
 ## Stack:
 
 - Java 8, Springboot 2, Monorepo project structure
-- ArtemisMQ, Slack, Feign
+- ArtemisMQ [Artemis], Slack, Feign
 - Docker, Maven with docker plugin
 
 ## Artemis UI
